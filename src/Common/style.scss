@@ -1,0 +1,14 @@
+.container_action{
+   list-style: none;
+   display: flex;
+   justify-content: space-around;
+   padding: 0;
+   align-items: center;
+   width: 100%;
+    li{
+        span{
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+}
