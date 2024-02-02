@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import LayOutAdmin from './HOCs/LayOutAdmin';
 import {routes} from './app/Routes'
+import Login from './Component/logins/Login';
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
           <Route key={path} path={path} element={<Component/>} />
         )}
       </Route>
+      <Route path='/login' element={<Login/>}/>
     </Routes>
     </BrowserRouter>
   );

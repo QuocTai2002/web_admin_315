@@ -3,8 +3,9 @@ import "./style.scss";
 import {
   OrderedListOutlined,
   UserOutlined,
-  UsergroupAddOutlined,
-  SmileOutlined,
+  ClusterOutlined,
+  DashboardOutlined ,
+  EnvironmentOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import { Outlet, useNavigate} from "react-router-dom";
@@ -28,8 +29,8 @@ const items = [
   },
   {
     key: "/",
-    icon: <UsergroupAddOutlined />,
-    label: "Người dùng",
+    icon: <DashboardOutlined />,
+    label: "DashBoard",
   },
   {
     key: "children",
@@ -46,12 +47,12 @@ const items = [
       },
       {
         key: "/user",
-        icon: <SmileOutlined />,
+        icon: <ClusterOutlined />,
         label: "Chuyên Khoa",
       },
       {
         key: "/user11",
-        icon: <SmileOutlined />,
+        icon: <EnvironmentOutlined />,
         label: "Địa chỉ",
       },
     ],
