@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.css";
 import { UserOutlined } from "@ant-design/icons";
 import {  useNavigate } from "react-router-dom";
 import { getLoginInfo } from "../../Redux/thunk/userThunk";
 import Loading from "../../Common/loading/Loading";
 const Login = () => {
+  const {loadingPage} = useSelector(state => state.modalReducer)
   const [loginInfo, setLoginInfo] = useState({ username: "", password: "" });
-  const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(getLoginInfo(loginInfo))
-    console.log(loginInfo);
+    await dispatch(getLoginInfo(loginInfo,navigate))
   };
 
   const handleChange = (e) => {
@@ -56,7 +55,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      {isLoading ? <Loading/> :""}
+      {loadingPage ? <Loading/> :''}
       
     </>
   );

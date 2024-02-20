@@ -9,6 +9,8 @@
 .bg{
     content: '';
     background-image: url('../../../public/images/newYear.webp');
+    background-position: unset;
+    background-size: cover;
     position: absolute;
     width: 100%;
     height: 100%;
