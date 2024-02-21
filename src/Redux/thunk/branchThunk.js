@@ -16,3 +16,13 @@ export const getBranch = (key)  => async (dispatch) =>{
     }
 
 } 
+
+//ADD BRANCH
+export const addNewBranch = (form) => async (dispatch) => {
+    try {
+        await branchService.postBranch(form)
+        await dispatch(getBranch(''))
+    } catch (err) {
+        console.log(err);
+    }
+}
