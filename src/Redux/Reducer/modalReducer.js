@@ -2,6 +2,7 @@ import { produce } from 'immer'
 import * as typeAction from '../../constants/constant'
 const initialState ={
     modalDelete: null,
+    modalAddBranch: false,
     loadingPage:false
 }
 export const modalReducer = (state = initialState,{type,payload}) =>{
@@ -11,6 +12,13 @@ export const modalReducer = (state = initialState,{type,payload}) =>{
         };
         if(type === typeAction.OFF_LOADING_PAGE){
             draft.loadingPage = false
-        }
+        };
+        if(type === typeAction.OPEN_MODAL_ADD_BRANCH){
+            draft.modalAddBranch = true
+        };
+        if(type === typeAction.CLOSE_MODAL_ADD_BRANCH){
+            draft.modalAddBranch = false
+        };
+
     })
 }
