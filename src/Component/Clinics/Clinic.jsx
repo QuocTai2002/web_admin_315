@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import ButtonAddNew from '../../Common/Button/ButtonAddNew'
 import TableClinic from "../../Common/Table/TableClinic";
 import AddBranchModal from "../../Common/Table/AddBranchModal";
+import Alert from "../../Common/alert/alertLoading";
+import ModalDelete from "../../Common/Modal/ModalDelete";
 const Clinic = () => {
 
   const [isClassActive, setIsClassActive] = useState('Nhi đồng 315')
@@ -54,6 +56,7 @@ const Clinic = () => {
         </div>
       </div>
       <AddBranchModal chuyenKhoa = {chuyenkhoa}/>
+      <ModalDelete />
     </div>
   );
 };

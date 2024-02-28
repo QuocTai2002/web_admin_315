@@ -3,7 +3,7 @@ import { Modal, Switch, message } from "antd";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as typeAction from "../../constants/constant";
-import { addNewBranch } from "../../Redux/thunk/branchThunk";
+import { addNewBranch, getBranch } from "../../Redux/thunk/branchThunk";
 import { useRef } from "react";
 // TẠO TITLE CHO HEADER MODAL
 const title = (
@@ -58,9 +58,10 @@ const AddBranchModal = (props) => {
         Longitude: "",
       },
     },
-    onSubmit: (values) => {
-      // dispatch(addNewBranch(values));
+    onSubmit: async (values) => {
+      dispatch(addNewBranch(values));
       handleResetForm();
+      message.success("Tạo thành công !");
       handleCancel();
     },
   });
@@ -177,7 +178,7 @@ const AddBranchModal = (props) => {
               <li className="flex flex-col w-1/2">
                 <label className="font-semibold" htmlFor="">
                   Thời gian sáng{" "}
-                  <span className="text-red-500">( Không bắt buột)</span>
+                  <span className="text-red-500">(Không bắt buột)</span>
                 </label>
                 <input
                   id="AM"
@@ -195,7 +196,7 @@ const AddBranchModal = (props) => {
               <li className="flex flex-col w-1/2">
                 <label className="font-semibold" htmlFor="">
                   Thời gian chiều{" "}
-                  <span className="text-red-500">( Không bắt buột)</span>
+                  <span className="text-red-500">(Không bắt buột)</span>
                 </label>
                 <input
                   id="PM"

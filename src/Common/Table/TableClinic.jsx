@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Table, Tag, Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { getBranch } from "../../Redux/thunk/branchThunk";
+import { getBranch,deleteBranch } from "../../Redux/thunk/branchThunk";
+import  * as typeAction from '../../constants/constant'
 const TableClinic = () => {
   const dispatch = useDispatch();
   const [keyWord, setKeyWord] = useState("");
@@ -15,6 +16,19 @@ const TableClinic = () => {
     dispatch(getBranch(keyWord));
   }, []);
 
+  const delateBranchById = (id) =>{
+      dispatch(deleteBranch(id))
+  }
+   const openModalDelete = (items) => {
+    dispatch({
+      type:typeAction.INFO_BRANCH,
+      payload:items
+    })
+    dispatch({
+      type: typeAction.OPEN_MODAL_DELETE_BRANCH
+    });
+
+   }
   const columns = [
     {
       title: "Tên chi nhánh",
@@ -113,7 +127,7 @@ const TableClinic = () => {
                 <EditOutlined className="text-green-500 text-lg cursor-pointer" />
               </Tooltip>
               <Tooltip title="Xóa" color="red">
-                <DeleteOutlined className="text-red-500 text-lg cursor-pointer" />
+                <DeleteOutlined onClick={()=>{openModalDelete(items)}} className="text-red-500 text-lg cursor-pointer" />
               </Tooltip>
             </div>
           ),

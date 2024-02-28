@@ -6,5 +6,8 @@ export const branchService = {
     },
     postBranch : (formData) => {
         return https.post(`/createBranch`,formData)
+    },
+    deleteBranch : (id) => {
+        return https.delete(`/deleteBranch?id=${id}`)
     }
 }

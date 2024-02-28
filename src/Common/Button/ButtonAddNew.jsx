@@ -1,12 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import * as typeAction from "../../constants/constant";
+// import { messageApi } from "../alert/alertLoading";
 
 const ButtonAddNew = () => {
   const dispatch = useDispatch();
+  const key = 'updatable';
   const showModalAddBranch = () => {
     dispatch({ type: typeAction.OPEN_MODAL_ADD_BRANCH });
+    // openMessage()
+
   };
+  // const openMessage = () => {
+  //   messageApi.open({
+  //     key,
+  //     type: 'loading',
+  //     content: 'Loading...',
+  //   });
+  //   setTimeout(() => {
+  //     messageApi.open({
+  //       key,
+  //       type: 'success',
+  //       content: 'Loaded!',
+  //       duration: 2,
+  //     });
+  //   }, 1000);
+  // };
   return (
     <>
       <button

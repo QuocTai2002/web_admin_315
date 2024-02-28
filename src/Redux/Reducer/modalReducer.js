@@ -3,7 +3,8 @@ import * as typeAction from '../../constants/constant'
 const initialState ={
     modalDelete: null,
     modalAddBranch: false,
-    loadingPage:false
+    loadingPage:false,
+    modalDeleteBranch: false
 }
 export const modalReducer = (state = initialState,{type,payload}) =>{
     return produce (state, draft =>{
@@ -18,6 +19,12 @@ export const modalReducer = (state = initialState,{type,payload}) =>{
         };
         if(type === typeAction.CLOSE_MODAL_ADD_BRANCH){
             draft.modalAddBranch = false
+        };
+        if(type === typeAction.OPEN_MODAL_DELETE_BRANCH){
+            draft.modalDeleteBranch = true
+        };
+        if(type === typeAction.CLOSE_MODAL_DELETE_BRANCH){
+            draft.modalDeleteBranch = false
         };
 
     })
