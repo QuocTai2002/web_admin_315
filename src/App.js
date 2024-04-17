@@ -5,6 +5,7 @@ import {routes} from './app/Routes'
 import Login from './Component/logins/Login';
 import React from "react";
 import { Navigate } from "react-router-dom";
+import Clinic from './Component/Clinics/Clinic';
 
 // HOC kiểm tra trạng thái đăng nhập
 const RequireAuth = ({ children }) => {
@@ -22,7 +23,7 @@ function App() {
       <Routes>
         {/* Route cho trang đăng nhập */}
         <Route path="/" element={<Login />} />
-
+        <Route path="/branch/clinic" element={<RequireAuth><Clinic /></RequireAuth>} />
         {/* Route cho trang admin */}
         <Route path="/admin/*" element={<RequireAuth><LayOutAdmin /></RequireAuth>} />
       </Routes>

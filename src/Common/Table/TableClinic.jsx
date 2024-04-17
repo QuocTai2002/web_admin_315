@@ -1,10 +1,12 @@
+// Trong component TableClinic
 import React, { useEffect, useState } from "react";
 import { Table, Tag, Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { getBranch,deleteBranch } from "../../Redux/thunk/branchThunk";
-import  * as typeAction from '../../constants/constant'
-const TableClinic = () => {
+import { getBranch, deleteBranch } from "../../Redux/thunk/branchThunk";
+import * as typeAction from "../../constants/constant";
+
+const TableClinic = ({ onOpenDetail }) => { // Truyền hàm onOpenDetail vào component
   const dispatch = useDispatch();
   const [keyWord, setKeyWord] = useState("");
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -16,19 +18,18 @@ const TableClinic = () => {
     dispatch(getBranch(keyWord));
   }, []);
 
-  const delateBranchById = (id) =>{
-      dispatch(deleteBranch(id))
-  }
-   const openModalDelete = (items) => {
+  const delateBranchById = (id) => {
+    dispatch(deleteBranch(id));
+  };
+  const openModalDelete = (items) => {
     dispatch({
-      type:typeAction.INFO_BRANCH,
-      payload:items
-    })
-    dispatch({
-      type: typeAction.OPEN_MODAL_DELETE_BRANCH
+      type: typeAction.INFO_BRANCH,
+      payload: items,
     });
-
-   }
+    dispatch({
+      type: typeAction.OPEN_MODAL_DELETE_BRANCH,
+    });
+  };
   const columns = [
     {
       title: "Tên chi nhánh",
@@ -121,13 +122,21 @@ const TableClinic = () => {
           action: (
             <div className="flex gap-4 justify-center">
               <Tooltip title="Xem" color="blue">
-                <EyeOutlined className="text-blue-500 text-lg cursor-pointer" />
+                <EyeOutlined
+                  className="text-blue-500 text-lg cursor-pointer"
+                  onClick={() => onOpenDetail(items)} 
+                />
               </Tooltip>
               <Tooltip title="Chỉnh sửa" color="green">
                 <EditOutlined className="text-green-500 text-lg cursor-pointer" />
               </Tooltip>
               <Tooltip title="Xóa" color="red">
-                <DeleteOutlined onClick={()=>{openModalDelete(items)}} className="text-red-500 text-lg cursor-pointer" />
+                <DeleteOutlined
+                  onClick={() => {
+                    openModalDelete(items);
+                  }}
+                  className="text-red-500 text-lg cursor-pointer"
+                />
               </Tooltip>
             </div>
           ),

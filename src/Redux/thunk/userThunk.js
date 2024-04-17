@@ -1,26 +1,34 @@
 import * as typeAction from '../../constants/constant'
 import { UserService } from '../../Services/userService';
 // LOGIN
-export const getLoginInfo = (data,navigate) => async (dispatch) => {
+export const getLoginInfo = (infoUser,navigate) => async (dispatch) => {
     try {
         dispatch({
             type:typeAction.ON_LOADING_PAGE
         })
-        const res = await UserService.signIn(data);
+        const result = await UserService.signIn(infoUser); // gọi api 
+        localStorage.setItem("access_Token", result.data.access_Token)
+        console.log(result);
         await dispatch({
             type:typeAction.SIGN_IN,
-            payload:res.data.data
+            payload:result.data.data
         })
-        
-        setTimeout(()=>{
-            dispatch({
-                type:typeAction.OFF_LOADING_PAGE
-            })
-            navigate('/')
-        },1000)
-       
+        // để làm đẹp form đăngj
+        navigate('/admin')
+        dispatch({
+                    type:typeAction.OFF_LOADING_PAGE
+                })
+        // setTimeout(()=>{
+        //     dispatch({
+        //         type:typeAction.OFF_LOADING_PAGE
+        //     })
+        //     navigate('/')
+        // },1000)     
        
     } catch (err) {
+        dispatch({
+            type:typeAction.OFF_LOADING_PAGE
+        })
         console.log(err);
     }
 } 

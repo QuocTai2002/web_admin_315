@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {useDispatch, useSelector} from 'react-redux'
 import "./style.scss";
+import {fetchBranch} from '../Redux/thunk/branchThunk'
 import {
   OrderedListOutlined,
   UserOutlined,
@@ -69,7 +71,8 @@ const items = [
 const LayOutAdmin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const {infoUser} = useSelector((state) => state.userReducer);// sử dụng select hook redux reducer lấy store
 const handleLogout = () => {
   localStorage.removeItem("access_Token");
   if (!localStorage.getItem("access_Token")) {
@@ -77,7 +80,10 @@ const handleLogout = () => {
   }
 };
 
-
+useEffect(()=>{
+  console.log(infoUser);
+  dispatch(fetchBranch())
+},[])
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -114,7 +120,7 @@ const handleLogout = () => {
         >
           <div className="header_container">
             <div className="image">
-              <h3 style={{ margin: 0 }}>Hi, Tài Nguyễn</h3>
+              <h3 style={{ margin: 0 }}>Hi, {infoUser?.Name}</h3>
               <img
                 src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-male-avatar-simple-cartoon-design-png-image_1934458.jpg"
                 alt="#"
